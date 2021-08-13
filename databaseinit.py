@@ -17,12 +17,32 @@ c = cnxn.cursor()
 c.execute("USE DiscordDungeons")
 
 c.execute("DROP TABLE IF EXISTS users;")
+c.execute("DROP TABLE IF EXISTS inventories;")
+c.execute("DROP TABLE IF EXISTS items;")
 
+# Initialize Tables
 c.execute(
-  "CREATE TABLE users(DISCORD_ID INT, PRIMARY KEY (DISCORD_ID))"
+  "CREATE TABLE users(
+    name VARCHAR(32), discord_id BIGINT, 
+    wealth BIGINT, attack INT, 
+    defense INT, strength INT, 
+    fortitude INT, woodcutting INT, 
+    mining INT, gathering INT, 
+    PRIMARY KEY (discord_id)
+    )"
   )
 
-c.execute("INSERT INTO users VALUES(1)")
+c.execute(
+  "CREATE TABLE inventories(item_id INT, item_count BIGINT, discord_id BIGINT)"
+  )
+
+c.execute(
+  "CREATE TABLE items(item_id INT, item_count BIGINT, PRIMARY KEY (item_id)"
+  )
+
+# Add items to items table
+
+c.execute("INSERT INTO users VALUES('The Chosen One', 1)")
 
 for r in c.execute("select * from users"):
   print(r)

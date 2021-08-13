@@ -10,7 +10,11 @@ cnxn = pyodbc.connect(
   "Trusted_Connection=yes;"
   )
 
-async def newuser(uid):
+async def adduser(username, uid):
   c = cnxn.cursor()
-  c.execute("INSERT INTO users VALUES(69)")
+  c.execute("INSERT INTO users VALUES('{}', {})".format(username, int(uid)))
   c.commit()
+
+async def removeuser(uid):
+  c = cnxn.cursor()
+  
