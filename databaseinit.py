@@ -22,14 +22,7 @@ c.execute("DROP TABLE IF EXISTS items;")
 
 # Initialize Tables
 c.execute(
-  "CREATE TABLE users(
-    name VARCHAR(32), discord_id BIGINT, 
-    wealth BIGINT, attack INT, 
-    defense INT, strength INT, 
-    fortitude INT, woodcutting INT, 
-    mining INT, gathering INT, 
-    PRIMARY KEY (discord_id)
-    )"
+  "CREATE TABLE users(name VARCHAR(32), discord_id BIGINT, wealth BIGINT DEFAULT 0, attack INT DEFAULT 0, defense INT DEFAULT 0, strength INT DEFAULT 0, fortitude INT DEFAULT 0, woodcutting INT DEFAULT 0, mining INT DEFAULT 0, gathering INT DEFAULT 0, PRIMARY KEY (discord_id))"
   )
 
 c.execute(
@@ -37,12 +30,12 @@ c.execute(
   )
 
 c.execute(
-  "CREATE TABLE items(item_id INT, item_count BIGINT, PRIMARY KEY (item_id)"
+  "CREATE TABLE items(item_id INT, item_count BIGINT, PRIMARY KEY (item_id))"
   )
 
 # Add items to items table
 
-c.execute("INSERT INTO users VALUES('The Chosen One', 1)")
+c.execute("INSERT INTO users (name, discord_id) VALUES('The Chosen One', 1)")
 
 for r in c.execute("select * from users"):
   print(r)

@@ -21,10 +21,16 @@ print("Launch Success")
 @bot.command()
 async def ping(ctx):
     await ctx.send('pong')
-    
+
+# Displays your skills
+@bot.command()
+async def skills(ctx):
+  msg = await ds.fetchskills(ctx.author.id)
+  await ctx.send(msg)
+
 @bot.command()
 async def createAct(ctx):
-  await ds.newuser(ctx.author.id)
+  await ds.adduser(ctx.author, ctx.author.id)
     
 @bot.command()
 async def test(ctx, *args):
